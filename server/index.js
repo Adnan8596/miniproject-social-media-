@@ -9,10 +9,10 @@ const port = 8000;
 
 
 app.use(express.json())
-app.use(userRouter);
+app.use('/api',userRouter);
 
 
 app.listen(port, () => {
-    console.log('server running at 3000')
+    console.log('server running at ' + port)
 })
 

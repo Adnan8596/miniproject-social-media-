@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require('validator');
 const jwt = require("jsonwebtoken");
 
-const {checkstrIncludes,encrypt, decrypt} = require('../utils/utils');
+const {encrypt, decrypt} = require('../utils/utils');
 
 
  const userSchema = new mongoose.Schema({
@@ -19,16 +19,6 @@ const {checkstrIncludes,encrypt, decrypt} = require('../utils/utils');
         validate(value) {
             if(!validator.isEmail(value)) {
                 throw new Error("Email is not valid");
-            }
-        }
-    },
-    age:{
-        type:Number,
-        min:5,
-        default:10,
-        validate(val) {
-            if(val < 0) {
-                throw new Error("Age must be a positive number")
             }
         }
     },
