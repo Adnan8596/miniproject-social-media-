@@ -1,0 +1,21 @@
+.flex-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    padding: 20px;
+    width: 100%;
+}
+.form-input {
+    margin: 15px;
+}
+.form-container {
+    width: 30%;
+}
+.form-header {
+    font-size: 3rem;
+    font-weight: lighter;
+    text-align: center;
+}
