@@ -3,19 +3,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fafafa;
 }
 .form{
     padding: 20px;
     width: 100%;
 }
 .form-input {
-    margin: 15px;
+    margin: 25px;
 }
 .form-container {
-    width: 30%;
+    width: 35%;
 }
 .form-header {
     font-size: 3rem;
     font-weight: lighter;
-    text-align: center;
+    /* text-align: center; */
+    margin: 0;
+    padding: 0;
+    margin-left: 25px;
 }

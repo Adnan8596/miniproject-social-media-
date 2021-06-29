@@ -7,12 +7,8 @@ import '../styles/signup.css'
 
 class SignUp extends React.Component {
     state = {
-        name:'',
         email:'',
         password:''
-    }
-    handleName = e => {
-        this.setState({name:e.target.value})
     }
     handleEmail = e => {
         this.setState({
@@ -25,7 +21,7 @@ class SignUp extends React.Component {
     handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await fetch('/users',{method:'POST',body:JSON.stringify(this.state),headers:{ 'Content-Type':'application/json'}});
+            const res = await fetch('/users/login',{method:'POST',body:JSON.stringify(this.state),headers:{ 'Content-Type':'application/json'}});
             if(!res.ok)
                 console.log(res)
             const user = await res.json();
@@ -40,21 +36,9 @@ class SignUp extends React.Component {
                 <div className='form-container'>
                     <Card fluid>
                         <div className="form">
-                            <h1 className='form-header'>Sign Up</h1>
+                            <h1 className='form-header'>Sign In</h1>
                             <form onSubmit={this.handleSubmit}>
                                 <div className='form-input'>
-                                    <Input 
-                                        fluid
-                                        type='text'
-                                        className='inp'
-                                        name='name'
-                                        required={true}
-                                        label='Name'
-                                        placeholder='Full Name'
-                                        value={this.state.name}
-                                        onChange={this.handleName}
-                                        size='big'
-                                    />
                                 </div>
                                 <div className="form-input">
                                     <Input 
@@ -85,7 +69,7 @@ class SignUp extends React.Component {
                                     />
                                 </div>
                                 <div className="form-input">
-                                    <Button positive fluid size='big'>Sign Up</Button>
+                                    <Button positive fluid size='big'>Sign In</Button>
                                 </div>
                             </form>
                         </div>
