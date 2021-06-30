@@ -1,22 +1,52 @@
 import React from 'react';
 import {Route, Switch, Router} from 'react-router-dom'
 import createHistory from 'history/createBrowserHistory'
+import {connect} from 'react-redux'
+import {api} from '../constant'
 
 import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
+import Posts from '../dashboard/Posts';
+import { addUser } from '../actions/auth';
+import '../App.css'
+import Navbar from '../components/Navbar';
 
 export const history = createHistory();
 
 class AppRouter extends React.Component {
+
+    async componentDidMount() {
+        const token = window.localStorage.getItem('token');
+        console.log(this.props.user.token)
+        if(!this.props.user.token) {
+            if(token) {
+                try {
+                    console.log('hi')
+                    const res = await fetch(`${api}/users/me`,{headers: new Headers({
+                        'Authorization':'Bearer ' + token
+                    })})
+                    const user = await res.json();
+                    this.props.dispatch(addUser(user))
+                } catch(err) {
+                    console.log(err)
+                }
+            }
+        }
+    }
     render() {
         return(
             <Router history={history}>
+                <Navbar />
                 <Switch>
                     <Route path='/signup' exact={true} component={SignUp} />
                     <Route path='/signin' exact={true} component={SignIn} />
+                    <Route path='/posts' exact={true} component={Posts} />
                 </Switch>
             </Router>
         )
     }
 }
-export default AppRouter;
+const mapStateToProps = state => ({
+    user:state.user
+})
+export default connect(mapStateToProps)(AppRouter);

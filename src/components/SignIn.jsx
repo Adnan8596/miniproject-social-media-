@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card,Input,Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {addUser} from '../actions/auth'
 
 import '../styles/signup.css'
@@ -26,9 +27,13 @@ class SignUp extends React.Component {
                 console.log(res)
             const user = await res.json();
             this.props.dispatch(addUser(user))
+            window.localStorage.setItem('token',user.token)
         }catch(err) {
             console.log('test',err);
         }
+    }
+    componentDidMount() {
+    
     }
     render() {
         return(
@@ -67,6 +72,7 @@ class SignUp extends React.Component {
                                     onChange={this.handlePassword}
                                     size='big'
                                     />
+                                    <p>To sign up click <Link to='/signup'>Here</Link></p>                                
                                 </div>
                                 <div className="form-input">
                                     <Button positive fluid size='big'>Sign In</Button>

@@ -1,9 +1,13 @@
 const express = require('express');
 const router = new express.Router();
+const multer = require('multer')
+
 
 const User = require('../models/user');
 
+
 const {auth} = require('../middleware/auth');
+
 
 router.post('/users', async (req, res) => {
     const newuser = new User(req.body);
@@ -33,6 +37,29 @@ router.post('/users/login', async (req, res) => {
     }
 
 })
+const upload = multer({
+    limits:{
+        fileSize:10000000
+    },
+    fileFilter(req, file, cb) {
+        if(!file.originalname.endsWith('.jpg')) {
+            return cb(new Error('please upload a word document'));
+        }
+        cb(undefined, true)
+    }
+})
+router.post('/users/avatar',auth,upload.single('avatar'), async (req, res) => {
+    try{
+        req.user.avatar = req.file.buffer;
+        await req.user.save();
+        res.send()
+    }catch(err) {
+        console.log(err)
+    }
+}, (err, req, res, next) => {
+    console.log(err)
+    res.status(400).send({err:err.message})
+})
 router.post('/users/logout',auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -54,7 +81,10 @@ router.post('/users/logoutAll',auth, async (req, res) => {
     }
 })
 router.get('/users/me',auth, async (req, res) => {
-    res.send(req.user)
+    res.send({
+        user:req.user,
+        token:req.token
+    })
 })
 router.get('/users/:id', async (req, res) => {
     const userid = req.params.id;
@@ -104,6 +134,7 @@ router.delete('/users/me',auth, async (req, res) => {
         res.status(400).send(err)
     }
 })
+
 
 
 module.exports = router;

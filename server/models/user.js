@@ -31,6 +31,16 @@ const {encrypt, decrypt} = require('../utils/utils');
         //     }
         // }
     },
+    joinedcommunity:[{
+        type:String
+    }],
+    avatar: {
+        type:Buffer
+    },
+    avatarthr: {
+        type:Boolean,
+        default:false
+    },
     tokens:[{
         token: {
             type:String,
