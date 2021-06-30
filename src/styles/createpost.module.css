@@ -1,0 +1,7 @@
+.formFlex {
+    display: flex;
+    justify-content: center;
+}
+.formContainer {
+    width: 40%;
+}

@@ -37,15 +37,15 @@ class SignUp extends React.Component {
     }
     render() {
         return(
-            <div className='flex-container'>
-                <div className='form-container'>
+            <div className='Uflex-container'>
+                <div className='Uform-container'>
                     <Card fluid>
-                        <div className="form">
-                            <h1 className='form-header'>Sign In</h1>
+                        <div className="Uform">
+                            <h1 className='Uform-header'>Sign In</h1>
                             <form onSubmit={this.handleSubmit}>
-                                <div className='form-input'>
+                                <div className='Uform-input'>
                                 </div>
-                                <div className="form-input">
+                                <div className="Uform-input">
                                     <Input 
                                         fluid
                                         type='email'
@@ -59,7 +59,7 @@ class SignUp extends React.Component {
                                         size='big'
                                         />
                                 </div>
-                                <div className="form-input">
+                                <div className="Uform-input">
                                     <Input 
                                     fluid
                                     type='password'
@@ -74,7 +74,7 @@ class SignUp extends React.Component {
                                     />
                                     <p>To sign up click <Link to='/signup'>Here</Link></p>                                
                                 </div>
-                                <div className="form-input">
+                                <div className="Uform-input">
                                     <Button positive fluid size='big'>Sign In</Button>
                                 </div>
                             </form>

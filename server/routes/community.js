@@ -19,6 +19,7 @@ router.post('/community',auth, async (req, res) => {
         await req.user.save();
         res.send(community);
     }catch(err) {
+        console.log(err)
         res.status(400).send({
             err:true,
             errMsg:err

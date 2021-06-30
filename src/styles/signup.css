@@ -1,21 +1,21 @@
-.flex-container {
+.Uflex-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fafafa;
 }
-.form{
+.Uform{
     padding: 20px;
     width: 100%;
 }
-.form-input {
+.Uform-input {
     margin: 25px;
 }
-.form-container {
+.Uform-container {
     width: 35%;
 }
-.form-header {
+.Uform-header {
     font-size: 3rem;
     font-weight: lighter;
     /* text-align: center; */

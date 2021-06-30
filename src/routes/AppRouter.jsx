@@ -10,6 +10,8 @@ import Posts from '../dashboard/Posts';
 import { addUser } from '../actions/auth';
 import '../App.css'
 import Navbar from '../components/Navbar';
+import CreateCommunity from '../components/CreateCommunity';
+import CreatePost from '../components/CreatePost';
 
 export const history = createHistory();
 
@@ -41,6 +43,8 @@ class AppRouter extends React.Component {
                     <Route path='/signup' exact={true} component={SignUp} />
                     <Route path='/signin' exact={true} component={SignIn} />
                     <Route path='/posts' exact={true} component={Posts} />
+                    <Route path='/createcommunity' exact={true}  component={CreateCommunity}/>
+                    <Route path='/createpost' exact={true} component={CreatePost} />
                 </Switch>
             </Router>
         )

@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom'
+import style from '../styles/Navbar.module.css'
 
 const Navbar = props => (
     <div style={{
@@ -12,10 +13,10 @@ const Navbar = props => (
         marginBottom:'20px'
         }}>
             <h3 style={{color:'white',margin:'0',padding:'0'}}>
-                <Link style={{color:'white'}} to='/posts'>Home</Link>
+                <Link className={style.head} to='/posts'>Home</Link>
             </h3>
             <h3 style={{margin:'0',padding:'0'}}>
-                <Link style={{color:'white'}}>Logout</Link>
+                <Link className={style.head}>Logout</Link>
             </h3>
     </div>
 )

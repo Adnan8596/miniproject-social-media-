@@ -1,10 +1,13 @@
 import React from 'react';
+import styles from '../styles/Posts.module.css'
+import Menu from '../components/Menu'
 
 class Posts extends React.Component {
-
     render() {
         return(
-            <h1>Posts</h1>
+            <div className={styles.flexContainer}>
+                <Menu />
+            </div>
         )
     }
 }
