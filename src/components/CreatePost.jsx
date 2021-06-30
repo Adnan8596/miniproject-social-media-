@@ -40,11 +40,27 @@ class CreatePost extends React.Component {
             file:e.target.files[0]
         })
     }
+    handleSubmit = async e => {
+        const newData = {
+            post:this.state.post,
+            community:this.state.communitySelect
+        }
+        const token = window.localStorage.getItem('token');
+        try {
+            const res = await axios.post(`${api}/posts`,newData,{headers:{Authorization:'Bearer '+token}});
+            const formData = new FormData();
+            formData.append('image', this.state.file)
+            const resimg = await axios.post(`${api}/posts/${res.data._id}/image`,formData,{headers:{Authorization:'Bearer '+token}})
+            console.log(resimg.data)
+        }catch(err) {
+            console.log(err)
+        }
+    }
     render() {
         return(
             <div className={styles.formFlex}>
                 <div className={styles.formContainer}>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit}>
                         <Form.Field>
                             <label>Post:</label>
                             <TextArea 

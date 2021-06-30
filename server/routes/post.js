@@ -39,7 +39,7 @@ const upload = multer({
 router.post('/posts/:id/image',auth,upload.single('image'), async (req, res) => {
     try {
         const post = await Post.findOneAndUpdate({_id:req.params.id},{$set:{image:req.file.buffer}},{new:true});
-        res.send()
+        res.send(post)
     }catch(err) {
         console.log(err)
     }
@@ -48,7 +48,7 @@ router.post('/posts/:id/image',auth,upload.single('image'), async (req, res) => 
 })
 router.get('/posts',auth,async (req, res) => {
     try {
-        const posts = await Post.find({community: {$in:[...req.user.joinedcommunity]}}).sort({$natural:-1});
+        const posts = await Post.find({community: {$in:[...req.user.joinedcommunity]}}).sort({$natural:-1}).populate('owner').exec();
         res.send(posts)
     }catch(err) {
         console.log(err)

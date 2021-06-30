@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 const MenuList = () => (
     <div className={styles.menuContainer}>
-        <Menu vertical>
+        <Menu size='large' vertical>
             <Link to='/profile' className={styles.menuLink}>
                 <Menu.Item name='profile' link/>
             </Link>
