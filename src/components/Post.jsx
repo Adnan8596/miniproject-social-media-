@@ -3,12 +3,12 @@ import {Card,Image} from 'semantic-ui-react'
 import styles from '../styles/post.module.css'
 
 const Post = props => {
-    console.log('frm posts',props)
+
     return(
         <div className={styles.postContainer}>
             <Card fluid>
                 <Card.Content>
-                    <div className="userInfoContainer">
+                    <div className={styles.userInfoContainer}>
                         <div className="userImage">
                             <Image size='mini' src={'data:image/png;base64,' +props.owner.avatar} />
                         </div>
@@ -20,6 +20,12 @@ const Post = props => {
                                 has posted in {props.community} community
                             </div>
                         </div>
+                    </div>
+                    <div className={styles.feed}>
+                        {props.post}
+                    </div>
+                    <div className={styles.imgContainer}>
+                        <img src={`http://localhost:8000/api/posts/${props._id}/image`} alt="" srcset="" className={styles.img} />
                     </div>
                 </Card.Content>
             </Card>

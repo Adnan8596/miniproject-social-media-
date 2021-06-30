@@ -51,7 +51,7 @@ class CreatePost extends React.Component {
             const formData = new FormData();
             formData.append('image', this.state.file)
             const resimg = await axios.post(`${api}/posts/${res.data._id}/image`,formData,{headers:{Authorization:'Bearer '+token}})
-            console.log(resimg.data)
+            this.props.history.push('/posts')
         }catch(err) {
             console.log(err)
         }

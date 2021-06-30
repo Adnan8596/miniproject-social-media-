@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from '../styles/Posts.module.css'
 import Menu from '../components/Menu';
-import axios from 'axios'
 import {api} from '../constant'
 import {connect} from 'react-redux'
 import {addPosts} from '../actions/posts'
@@ -14,8 +13,13 @@ class Posts extends React.Component {
     async componentDidMount() {
         const token = window.localStorage.getItem('token');
         try {
-            const res = await axios.get(`${api}/posts`,{headers:{Authorization:'Bearer '+token}});
-            this.props.dispatch(addPosts(res.data));
+            // const res = await axios.get(`${api}/posts`,{headers:{Authorization:'Bearer '+token}});
+            const res = await fetch(`${api}/posts`,{headers: new Headers({
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + token
+            })})
+            const data = await res.json()
+            this.props.dispatch(addPosts(data));
             this.setState({
                 showPosts:true
             })

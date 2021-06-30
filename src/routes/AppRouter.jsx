@@ -12,6 +12,7 @@ import '../App.css'
 import Navbar from '../components/Navbar';
 import CreateCommunity from '../components/CreateCommunity';
 import CreatePost from '../components/CreatePost';
+import FollowCommunity from '../components/FollowCommunity';
 
 export const history = createHistory();
 
@@ -45,6 +46,7 @@ class AppRouter extends React.Component {
                     <Route path='/posts' exact={true} component={Posts} />
                     <Route path='/createcommunity' exact={true}  component={CreateCommunity}/>
                     <Route path='/createpost' exact={true} component={CreatePost} />
+                    <Route path='/followcommunity' exact={true} component={FollowCommunity} />
                 </Switch>
             </Router>
         )

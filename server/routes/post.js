@@ -46,6 +46,16 @@ router.post('/posts/:id/image',auth,upload.single('image'), async (req, res) => 
 },(err,req,res,next) => {
     res.status(400).send({err:err.message});
 })
+router.get('/posts/:id/image', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        
+        res.set('Content-Type', 'image/jpg');
+        res.send(post.image)
+    }catch(err) {
+        console.log(err)
+    }
+})
 router.get('/posts',auth,async (req, res) => {
     try {
         const posts = await Post.find({community: {$in:[...req.user.joinedcommunity]}}).sort({$natural:-1}).populate('owner').exec();

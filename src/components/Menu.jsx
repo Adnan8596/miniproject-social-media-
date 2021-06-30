@@ -19,9 +19,9 @@ const MenuList = () => (
                     Create community
                 </Menu.Item>
             </Link>
-            <Link to='/joincommunity'>
+            <Link to='/followcommunity'>
                 <Menu.Item name='community' link>
-                    Join community
+                    Follow community
                 </Menu.Item>
             </Link>
         </Menu>

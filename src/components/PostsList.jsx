@@ -6,10 +6,9 @@ import styles from '../styles/postlist.module.css'
 class PostList extends React.Component {
 
     render() {
-        console.log('frm postslist',this.props.posts)
         return(
             <div className={styles.postsFlex}>
-                {this.props.posts.map((post) => <Post {...post} />)}
+                {(this.props.posts.length > 0) && this.props.posts.map((post) => <Post key={post._id} {...post} />)}
             </div>
         )
     }

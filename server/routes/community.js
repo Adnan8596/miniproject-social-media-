@@ -27,15 +27,16 @@ router.post('/community',auth, async (req, res) => {
     }
 })
 router.post('/community/:id/join',auth,async (req, res) => {
+    console.log(req.params.id)
     try {
         const community = await Community.findOneAndUpdate({
-            _id:req.params.id
+            name:req.params.id
         },{
             $push:{members:req.user._id}
         },{returnNewDocument:true})
         req.user.joinedcommunity.push(community.name);
         await req.user.save();
-        const updateCommunity = await Community.findById(req.params.id)
+        const updateCommunity = await Community.findById(community._id)
         res.send(updateCommunity);
     }catch(err) {
         console.log(err)
