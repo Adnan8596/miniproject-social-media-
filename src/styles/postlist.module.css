@@ -1,5 +1,5 @@
 .postsFlex {
     display: flex;
-    width: 40%;
+    width: 50%;
     flex-direction: column;
 }

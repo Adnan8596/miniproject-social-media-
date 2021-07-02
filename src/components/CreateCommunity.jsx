@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../styles/createcommunity.module.css'
 import {Form,Button,Input} from 'semantic-ui-react';
+import {connect} from 'react-redux'
+import {addJoinedCommunity} from '../actions/auth'
 import {api} from '../constant'
 
 class CreateCommunity extends React.Component {
@@ -24,6 +26,7 @@ class CreateCommunity extends React.Component {
             })})
             if(!res.ok)
                 throw new Error('something is wrong')
+            this.props.dispatch(addJoinedCommunity(this.state.community))
             this.props.history.push('/posts')
         }catch(err) {
             console.log(err)
@@ -53,4 +56,4 @@ class CreateCommunity extends React.Component {
         )
     }
 }
-export default CreateCommunity;
+export default connect()(CreateCommunity);

@@ -4,6 +4,11 @@ const authReducer = (state = {}, action) => {
             return {...action.user.user, token:action.user.token}
         case 'LOGOUT':
             return {}
+        case 'JOINED_COMMUNITY':
+            return {
+                ...state,
+                joinedcommunity:[...state.joinedcommunity,action.community]
+            }
         default:
             return state
     }

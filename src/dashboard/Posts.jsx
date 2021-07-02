@@ -5,6 +5,7 @@ import {api} from '../constant'
 import {connect} from 'react-redux'
 import {addPosts} from '../actions/posts'
 import PostsList from '../components/PostsList';
+import CommunityList from '../components/CommunityList';
 
 class Posts extends React.Component {
     state = {
@@ -32,6 +33,7 @@ class Posts extends React.Component {
             <div className={styles.flexContainer}>
                 <Menu />
                 {this.state.showPosts && <PostsList />}
+                <CommunityList />
             </div>
         )
     }

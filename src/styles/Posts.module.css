@@ -1,4 +1,4 @@
 .flexContainer {
     display: flex;
-    padding: 0 40px;
+    justify-content: center;
 }
