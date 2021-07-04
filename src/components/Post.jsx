@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card,Image} from 'semantic-ui-react'
+import {Card,Image,Icon} from 'semantic-ui-react'
 import styles from '../styles/post.module.css'
 
 const Post = props => {
@@ -26,6 +26,19 @@ const Post = props => {
                     </div>
                     <div className={styles.imgContainer}>
                         <img src={`http://localhost:8000/api/posts/${props._id}/image`} alt="" srcset="" className={styles.img} />
+                    </div>
+                    <div className={styles.likeCommentContainer}>
+                        <div className={styles.likeContainer}>
+                            <div className={styles.likeCount}>
+                                {props.likes.length}
+                            </div>
+                            <div className={styles.likeIcon}>
+                                <Icon name='thumbs up' />
+                            </div>
+                        </div>
+                        <div className={styles.commentBtn}>
+                            Comment
+                        </div>
                     </div>
                 </Card.Content>
             </Card>

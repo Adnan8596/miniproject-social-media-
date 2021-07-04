@@ -1,5 +1,7 @@
 .menuContainer {
-    position: static;
+    /* position: fixed; */
+    /* width: 30%; */
+    /* left: 0; */
     margin: 0 15px;
 }
 .menuLink {

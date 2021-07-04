@@ -5,4 +5,10 @@
 .link {
     display: block;
     padding: 15px;
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
+.link:hover {
+    background-color: #e0e0e0;
 }

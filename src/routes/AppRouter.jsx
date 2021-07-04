@@ -38,6 +38,7 @@ class AppRouter extends React.Component {
     }
     render() {
         return(
+            <div style={{backgroundColor:'#F0F2F5'}}>
             <Router history={history}>
                 <Navbar />
                 <Switch>
@@ -49,6 +50,7 @@ class AppRouter extends React.Component {
                     <Route path='/followcommunity' exact={true} component={FollowCommunity} />
                 </Switch>
             </Router>
+            </div>
         )
     }
 }
