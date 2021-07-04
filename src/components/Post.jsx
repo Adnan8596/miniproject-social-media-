@@ -3,7 +3,7 @@ import {Card,Image,Icon} from 'semantic-ui-react'
 import styles from '../styles/post.module.css'
 
 const Post = props => {
-
+    const userLiked = props.likes.some(like => like === props.userId)
     return(
         <div className={styles.postContainer}>
             <Card fluid>
@@ -28,12 +28,16 @@ const Post = props => {
                         <img src={`http://localhost:8000/api/posts/${props._id}/image`} alt="" srcset="" className={styles.img} />
                     </div>
                     <div className={styles.likeCommentContainer}>
-                        <div className={styles.likeContainer}>
+                        <div 
+                        onClick={() => props.handleLike(props._id)} 
+                        className={styles.likeContainer}
+                        style={{color:userLiked? '#0571ED':'black'}}
+                        >
                             <div className={styles.likeCount}>
                                 {props.likes.length}
                             </div>
                             <div className={styles.likeIcon}>
-                                <Icon name='thumbs up' />
+                                <Icon name='thumbs up' /> 
                             </div>
                         </div>
                         <div className={styles.commentBtn}>

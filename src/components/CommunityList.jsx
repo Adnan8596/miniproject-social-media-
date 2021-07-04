@@ -14,7 +14,7 @@ const CommunityList = props => {
                         Community You Follow
                     </Card.Header>
                     <div className={styles.CommunityList}>
-                        {props.user.joinedcommunity.map((community) => <a className={styles.link} href={`http://localhost:8000/community/${community}/${props.user._id}/chat`} target='_blank'>{community}</a>)}
+                        {props.user.joinedcommunity.map((community, i) => <a key={i} className={styles.link} href={`http://localhost:8000/community/${community}/${props.user._id}/chat`} target='_blank'>{community}</a>)}
                     </div>
                 </Card.Content>
             </Card>

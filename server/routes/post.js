@@ -66,9 +66,10 @@ router.get('/posts',auth,async (req, res) => {
 })
 router.post('/posts/:id/like',auth, async (req, res) => {
     try {
-        const post = await Post.findOneAndUpdate({_id:req.params.id},{$push:{likes:req.user._id}},{new:true})
+        const post = await Post.findOneAndUpdate({_id:req.params.id},{$push:{likes:req.user._id}},{new:true}).populate('owner').exec();
         res.send(post);
     }catch(err) {
+        res.status(400).send(err)
         console.log(err)
     }
 })
