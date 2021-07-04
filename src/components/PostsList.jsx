@@ -18,6 +18,7 @@ class PostList extends React.Component {
         }
     }
     render() {
+        console.log('frm postlist')
         return(
             <div className={styles.postsFlex}>
                 {(this.props.posts.length > 0) && this.props.posts.map((post) => <Post 

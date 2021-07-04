@@ -37,6 +37,7 @@ class AppRouter extends React.Component {
         }
     }
     render() {
+        console.log('frm app router')
         return(
             <div style={{backgroundColor:'#F0F2F5'}}>
             <Router history={history}>
