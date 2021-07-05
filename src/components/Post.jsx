@@ -1,9 +1,30 @@
-import React from 'react'
-import {Card,Image,Icon} from 'semantic-ui-react'
+import React, {useState} from 'react'
+import {Card,Image,Icon,Form, Input} from 'semantic-ui-react'
 import styles from '../styles/post.module.css'
 
 const Post = props => {
     const userLiked = props.likes.some(like => like === props.userId)
+    const [state, setstate] = useState({
+        formshow:false,
+        commentshow:false,
+        comment:''
+        
+    })
+    const handleSubmit = e => {
+        e.preventDefault();
+    }   
+    const onCommentType = e => {
+        setstate({
+            ...state,
+            comment:e.target.value
+        })
+    }
+    const handleShowForm = () => {
+        setstate({
+            ...state,
+            formshow: !state.formshow
+        })
+    }
     return(
         <div className={styles.postContainer}>
             <Card fluid>
@@ -40,13 +61,25 @@ const Post = props => {
                                 <Icon name='thumbs up' /> 
                             </div>
                         </div>
-                        <div className={styles.commentBtn}>
+                        <div onClick={handleShowForm} className={styles.commentBtn}>
                             Comment
                         </div>
                     </div>
+                    {state.formshow && (
+                        <Form onSubmit={handleSubmit}>
+                        <Input
+                        onChange={onCommentType} 
+                        size='mini' 
+                        fluid 
+                        action='comment' 
+                        placeholder='Type comment'
+                        value={state.comment}
+                        />
+                    </Form>
+                    )}
                 </Card.Content>
             </Card>
         </div>
     )
 }
-export default Post
+export default React.memo(Post)
