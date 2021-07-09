@@ -5,7 +5,10 @@ const postsReducer = (state = [], action) => {
         case "UPDATE_POST":
             return state.map((post) => {
                 if(post._id === action.post._id)
-                    return action.post
+                    return {
+                        ...post,
+                        likes: action.post.likes
+                    }
                 return post
             })
         case "ADD_COMMENT":

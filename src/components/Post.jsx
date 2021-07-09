@@ -71,7 +71,7 @@ const Post = props => {
                     </div>
                     <div className={styles.likeCommentContainer}>
                         <div 
-                        onClick={() => props.handleLike(props._id)} 
+                        onClick={() => !userLiked && props.handleLike(props._id)} 
                         className={styles.likeContainer}
                         style={{color:userLiked? '#0571ED':'black'}}
                         >
