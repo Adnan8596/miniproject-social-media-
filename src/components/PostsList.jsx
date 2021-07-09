@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Post from './Post';
 import axios from 'axios'
 import {api} from '../constant'
-import {updatePost} from '../actions/posts'
+import {updatePost, addComment} from '../actions/posts'
 import styles from '../styles/postlist.module.css'
 
 class PostList extends React.Component {
@@ -17,8 +17,10 @@ class PostList extends React.Component {
             console.log(err)
         }
     }
+    handleCommentDispatch = (comment, postid) => {
+        this.props.dispatch(addComment(comment, postid))
+    }
     render() {
-        console.log('frm postlist')
         return(
             <div className={styles.postsFlex}>
                 {(this.props.posts.length > 0) && this.props.posts.map((post) => <Post 
@@ -26,6 +28,7 @@ class PostList extends React.Component {
                 key={post._id} 
                 {...post} 
                 userId={this.props.user._id}
+                handleDispatch={this.handleCommentDispatch}
                 />)}
             </div>
         )

@@ -58,8 +58,8 @@ router.get('/posts/:id/image', async (req, res) => {
 })
 router.get('/posts',auth,async (req, res) => {
     try {
-        const posts = await Post.find({community: {$in:[...req.user.joinedcommunity]}},{image:0}).sort({$natural:-1}).populate('owner').exec();
-        res.send(posts) 
+        const posts = await Post.find({community: {$in:[...req.user.joinedcommunity]}},{image:0}).sort({$natural:-1}).populate('owner').populate({path:'comments',populate:{path:'owner'}}).exec();
+        res.send(posts)
     }catch(err) {
         console.log(err)
     }

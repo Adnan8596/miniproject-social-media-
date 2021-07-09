@@ -6,5 +6,10 @@ const updatePost = post => ({
     type:'UPDATE_POST',
     post
 })
+const addComment = (comment,postId) => ({
+    type:'ADD_COMMENT',
+    comment,
+    postId
+})
 
-export {addPosts,updatePost}
+export {addPosts,updatePost,addComment}

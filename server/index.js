@@ -14,6 +14,7 @@ const userRouter = require('./routes/user');
 const communityRouter = require('./routes/community')
 const postRouter = require('./routes/post');
 const communityChat = require('./routes/chat');
+const commentRouter = require('./routes/comment')
 
 
 const port = 8000;
@@ -29,6 +30,7 @@ app.use(communityChat);
 app.use('/api',userRouter);
 app.use('/api', communityRouter);
 app.use('/api',postRouter);
+app.use('/api', commentRouter)
 
 communitychat.on('connection',(socketio) => {
 

@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
-import {Card,Image,Icon,Form, Input} from 'semantic-ui-react'
+import {Card,Image,Icon,Form, Input,Transition,Comment} from 'semantic-ui-react'
+import axios from 'axios';
+import {api} from '../constant';
 import styles from '../styles/post.module.css'
 
 const Post = props => {
@@ -7,11 +9,23 @@ const Post = props => {
     const [state, setstate] = useState({
         formshow:false,
         commentshow:false,
-        comment:''
+        comment:'',
+        animecmt:true,
+        commentsShow:false
         
     })
-    const handleSubmit = e => {
-        e.preventDefault();
+    const handleSubmit = async e => {
+        const token = window.localStorage.getItem('token');
+        try {
+           const res = await axios.post(`${api}/comment/${props._id}`,{comment:state.comment},{headers:{Authorization:'Bearer '+token}})
+           props.handleDispatch(res.data, props._id)
+           setstate({
+               ...state,
+               comment:''
+           })
+        }catch(err) {
+            console.log(err)
+        }
     }   
     const onCommentType = e => {
         setstate({
@@ -22,7 +36,14 @@ const Post = props => {
     const handleShowForm = () => {
         setstate({
             ...state,
-            formshow: !state.formshow
+            formshow: !state.formshow,
+            animecmt: !state.animecmt
+        })
+    }
+    const handleShowCmt = () => {
+        setstate({
+            ...state,
+            commentsShow: !state.commentsShow
         })
     }
     return(
@@ -61,22 +82,38 @@ const Post = props => {
                                 <Icon name='thumbs up' /> 
                             </div>
                         </div>
-                        <div onClick={handleShowForm} className={styles.commentBtn}>
-                            Comment
-                        </div>
+                        <Transition animation='pulse' duration={200} visible={state.animecmt}>
+                            <div onClick={handleShowForm} className={styles.commentBtn}>
+                                Comment
+                            </div>
+                        </Transition>
                     </div>
-                    {state.formshow && (
-                        <Form onSubmit={handleSubmit}>
-                        <Input
-                        onChange={onCommentType} 
-                        size='mini' 
-                        fluid 
-                        action='comment' 
-                        placeholder='Type comment'
-                        value={state.comment}
-                        />
-                    </Form>
-                    )}
+                    <div className={styles.viewcmt} onClick={handleShowCmt}>
+                        <span>view comments</span>
+                    </div>
+                    <Transition visible={state.formshow} animation='fade down' duration={200}>
+                        <Form  onSubmit={handleSubmit}>
+                            <Input
+                            onChange={onCommentType} 
+                            size='mini' 
+                            fluid 
+                            action='comment' 
+                            placeholder='Type comment'
+                            value={state.comment}
+                            />
+                        </Form>
+                    </Transition>
+                    <Comment.Group>
+                        {state.commentsShow && props.comments.map(comment => (
+                            <Comment>
+                                <Comment.Avatar src={'data:image/png;base64,' +comment.owner.avatar} />
+                                <Comment.Content>
+                                    <Comment.Author as='a'>{comment.owner.name}</Comment.Author>
+                                    <Comment.Text>{comment.comment}</Comment.Text>
+                                </Comment.Content>
+                            </Comment>
+                        )).reverse()}
+                    </Comment.Group>
                 </Card.Content>
             </Card>
         </div>
