@@ -79,7 +79,7 @@ const Post = props => {
                                 {props.likes.length}
                             </div>
                             <div className={styles.likeIcon}>
-                                <Icon name='thumbs up' /> 
+                                <Icon name={userLiked? "arrow alternate circle up outline" : "arrow alternate circle up"} /> 
                             </div>
                         </div>
                         <Transition animation='pulse' duration={200} visible={state.animecmt}>

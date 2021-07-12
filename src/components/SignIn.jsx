@@ -3,6 +3,7 @@ import {Card,Input,Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {addUser} from '../actions/auth'
+import {api} from '../constant'
 
 import '../styles/signup.css'
 
@@ -22,12 +23,13 @@ class SignUp extends React.Component {
     handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await fetch('/users/login',{method:'POST',body:JSON.stringify(this.state),headers:{ 'Content-Type':'application/json'}});
+            const res = await fetch(`${api}/users/login`,{method:'POST',body:JSON.stringify(this.state),headers:{ 'Content-Type':'application/json'}});
             if(!res.ok)
                 console.log(res)
             const user = await res.json();
             this.props.dispatch(addUser(user))
             window.localStorage.setItem('token',user.token)
+            this.props.history.push('/posts')
         }catch(err) {
             console.log('test',err);
         }
