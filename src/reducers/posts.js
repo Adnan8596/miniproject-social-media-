@@ -20,6 +20,8 @@ const postsReducer = (state = [], action) => {
                     }
                 return post
             })
+        case "REMOVE_POSTS":
+                return []
         default:
             return state
     }

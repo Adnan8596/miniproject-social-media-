@@ -12,6 +12,7 @@ class Posts extends React.Component {
         showPosts:false
     }
     async componentDidMount() {
+        console.log('test')
         const token = window.localStorage.getItem('token');
         try {
             // const res = await axios.get(`${api}/posts`,{headers:{Authorization:'Bearer '+token}});
@@ -21,9 +22,9 @@ class Posts extends React.Component {
             })})
             const data = await res.json()
             this.props.dispatch(addPosts(data));
-            this.setState({
-                showPosts:true
-            })
+            // this.setState({
+            //     showPosts:true
+            // })
         }catch(err) {
             console.log(err)
         }
@@ -32,7 +33,7 @@ class Posts extends React.Component {
         return(
             <div className={styles.flexContainer}>
                 <Menu />
-                {this.state.showPosts && <PostsList />}
+                <PostsList />
                 <CommunityList />
             </div>
         )

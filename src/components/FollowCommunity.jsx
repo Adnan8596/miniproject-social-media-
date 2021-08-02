@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../styles/followcommunity.module.css'
 import {Form,Button,Input} from 'semantic-ui-react';
+import {addJoinedCommunity} from '../actions/auth'
+import {connect} from 'react-redux'
 import {api} from '../constant'
 
 class FollowCommunity extends React.Component {
@@ -20,6 +22,7 @@ class FollowCommunity extends React.Component {
                 'Authorization':'Bearer ' + token
             })})
             console.log(res)
+            this.props.dispatch(addJoinedCommunity(this.state.community))
             this.props.history.push('/posts')
         }catch(err) {
             console.log(err)
@@ -36,7 +39,7 @@ class FollowCommunity extends React.Component {
                         required={true}
                         size='large'
                         type="text" 
-                        placeholder='pdacollage'
+                        placeholder='PDA College'
                         value={this.state.community}
                         onChange={this.handleChange}
                         fluid
@@ -49,4 +52,4 @@ class FollowCommunity extends React.Component {
         )
     }
 }
-export default FollowCommunity;
+export default connect()(FollowCommunity);

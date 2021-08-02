@@ -8,7 +8,7 @@ import styles from '../styles/createpost.module.css'
 class CreatePost extends React.Component {
     state = {
         joinedCommunity:[],
-        communitySelect:'',
+        communitySelect:'select community',
         post:'',
         file:null
     }
@@ -19,15 +19,16 @@ class CreatePost extends React.Component {
             const data = res.data;
             const joinedCommunity = data.user.joinedcommunity.map((data,i) => ({key:`${i}`,value:data,text:data}))
             this.setState({
-                joinedCommunity
+                joinedCommunity: data.user.joinedcommunity
             })
         }catch(err) {
             console.log(err)
         }
     }
     handleSelectChange = e => {
+        console.log(e.target.value)
         this.setState({
-            communitySelect:e.target.children[0].textContent
+            communitySelect:e.target.value
         })
     }
     handlePostChange = e => {
@@ -72,12 +73,16 @@ class CreatePost extends React.Component {
                         </Form.Field>
                         <Form.Field>
                             <label>Community</label>
-                            <Select 
+                            {/* <Select 
                             placeholder='Select Community' 
                             options={this.state.joinedCommunity}
                             onChange={this.handleSelectChange}
                             required={true}
-                            />
+                            /> */}
+                            <select name="communityname" defaultValue="select community" onChange={this.handleSelectChange}>
+                                <option value="select a community">select community</option>
+                                {this.state.joinedCommunity.map((community, i) => <option key={i} value={community}>{community}</option>)}
+                            </select>
                         </Form.Field>
                         <Form.Field>
                             <label>Choose a image</label>

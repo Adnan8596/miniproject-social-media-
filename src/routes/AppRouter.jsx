@@ -19,7 +19,10 @@ export const history = createHistory();
 class AppRouter extends React.Component {
 
     async componentDidMount() {
+        console.log(history.location.pathname)
         const token = window.localStorage.getItem('token');
+        if(!token)
+            return history.push('/signup');
         console.log(this.props.user.token)
         if(!this.props.user.token) {
             if(token) {
@@ -30,6 +33,7 @@ class AppRouter extends React.Component {
                     })})
                     const user = await res.json();
                     this.props.dispatch(addUser(user))
+                    history.push('/posts')
                 } catch(err) {
                     console.log(err)
                 }
@@ -39,7 +43,7 @@ class AppRouter extends React.Component {
     render() {
         console.log('frm app router')
         return(
-            <div style={{backgroundColor:'#F0F2F5'}}>
+            <div>
             <Router history={history}>
                 <Navbar />
                 <Switch>

@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {api} from '../constant'
 import {history} from '../routes/AppRouter'
+import {connect} from 'react-redux'
 import style from '../styles/Navbar.module.css'
 
 const Navbar = props => {
@@ -12,6 +13,7 @@ const Navbar = props => {
             if(res.status === 200) {
                 window.localStorage.removeItem('token');
                 history.push('/signin')
+                this.props.dispatch({type:'REMOVE_POSTS'})
             }
         } catch(err) {
             console.log(err)
@@ -37,4 +39,4 @@ const Navbar = props => {
         </div>
     )
 }
-export default Navbar;
+export default connect()(Navbar);

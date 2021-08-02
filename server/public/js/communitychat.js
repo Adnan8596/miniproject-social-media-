@@ -47,9 +47,16 @@ form.addEventListener('submit', e => {
     input.value = '';
 })
 socket.on('community-msg', (msg) => {
-    $('.chat-container').append(`<div class='msg-container'>
-    <div class='from'>${msg.name}</div>
-    <div class='msg'>${msg.text}</div>
-    </div>`)
+    if(msg.name === username) {
+        $('.chat-container').append(`<div class='msg-container sender'>
+        <div class='from'>${msg.name}</div>
+        <div class='msg'>${msg.text}</div>
+        </div>`)
+    } else {
+        $('.chat-container').append(`<div class='msg-container'>
+        <div class='from'>${msg.name}</div>
+        <div class='msg'>${msg.text}</div>
+        </div>`)
+    }
 })
 

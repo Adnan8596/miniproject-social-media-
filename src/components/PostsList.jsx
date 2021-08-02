@@ -21,16 +21,18 @@ class PostList extends React.Component {
         this.props.dispatch(addComment(comment, postid))
     }
     render() {
+        const noPosts = this.props.posts.length === 0;
         return(
-            <div className={styles.postsFlex}>
-                {(this.props.posts.length > 0) && this.props.posts.map((post) => <Post 
-                handleLike={this.handleLike} 
-                key={post._id} 
-                {...post} 
-                userId={this.props.user._id}
-                handleDispatch={this.handleCommentDispatch}
-                />)}
-            </div>
+                <div className={styles.postsFlex}>
+                    {noPosts && <h1 style={{textAlign:'center'}}>No Post to show</h1>}
+                    {(this.props.posts.length > 0) && this.props.posts.map((post) => <Post 
+                    handleLike={this.handleLike} 
+                    key={post._id} 
+                    {...post} 
+                    userId={this.props.user._id}
+                    handleDispatch={this.handleCommentDispatch}
+                    />)}
+                </div>
         )
     }
 }

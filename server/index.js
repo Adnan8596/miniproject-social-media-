@@ -39,7 +39,7 @@ communitychat.on('connection',(socketio) => {
     })
 
     socketio.on('community-newMsg', (msg) => {
-        communitychat.to(msg.id).emit('community-msg', {name:msg.name,text:msg.text})
+        communitychat.to(msg.id).emit('community-msg', {name:msg.name,text:msg.text,id:msg.id})
         // socketio.broadcast.to(msg.id).emit('community-msg', {name:msg.name,text:msg.text})
     })
 })
